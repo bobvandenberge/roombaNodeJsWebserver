@@ -3,6 +3,7 @@ var app = express()
 var bodyParser = require('body-parser');
 var expressWs = require('express-ws')(app);
 var path = require('path');
+var fs = require('fs');
 
 app.use(bodyParser.json()); // support json encoded bodies
 
@@ -13,7 +14,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/roomba', function (req, res) {
-  console.log("Writing to database: " + JSON.stringify(req.body));
+  fs.appendFileSync('messages.log', JSON.stringify(req.body) + "\n");
 
   openWebsockets.forEach(function (ws) {
     ws.send(JSON.stringify(req.body));
