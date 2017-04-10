@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Roomba</title>
+</head>
+
+<body>
+
+    <script>
+        var exampleSocket = new WebSocket("ws://localhost:3000/updates");
+
+        exampleSocket.onmessage = function (event) {
+            var div = document.getElementById('output');
+
+            div.innerHTML = div.innerHTML + event.data + "<br/>";
+        }
+    </script>
+
+    <div id="output"></div>
+</body>
+
+</html>
